@@ -2,6 +2,7 @@ package use_case;
 
 import common.DrinkType;
 import common.ReportDto;
+import model.Command;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +20,7 @@ public class OrderPickerShould {
     private int numberOfSugar;
     private boolean isHot;
     private ReportRepository reportRepository;
+    private BeverageQuantityCheckerRepository beverageQuantityCheckerRepository;
 
 
     @Before
@@ -66,5 +68,12 @@ public class OrderPickerShould {
         orderPicker.printReports(reportDtoList);
         Assert.assertTrue(orderPicker.getTotalCash() == 1.5);
         Assert.assertTrue(orderPicker.getSales() ==2);
+    }
+
+    @Test
+    public void send_notification_if_beverage_quantity_is_not_valid(){
+        orderPicker.validOrder(drinkType, numberOfSugar, isHot);
+        Command command = new Command(DrinkType.OrangeJuice, 0, false);
+        verify(beverageQuantityCheckerRepository).isEmpty(command.getDrinkType().getDrinkName());
     }
 }

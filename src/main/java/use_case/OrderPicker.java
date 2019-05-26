@@ -18,6 +18,9 @@ public class OrderPicker {
     private ReportRepository reportRepository;
     private double totalCash;
     private int sales;
+    private BeverageQuantityCheckerRepository beverageQuantityCheckerRepository;
+    private EmailNotifierRepository emailNotifierRepository;
+
 
     public OrderPicker(DrinkType drinkType, int numberOfSugar, boolean isHot, double customerMoney, ReportRepository reportRepository){
         this.drinkType = drinkType;
@@ -34,10 +37,16 @@ public class OrderPicker {
         if (moneyManager.isValidCommand()){
             cashCount += command.getDrinkType().getDrinkPrice();
         }
-        Sender sender = new Sender(command, moneyManager);
-        sender.messageCommandValidation(command, moneyManager);
-        ReportDto reportDto = new ReportDto(cashCount);
-        reportRepository.save(reportDto);
+        if(beverageQuantityCheckerRepository.isEmpty(command.getDrinkType().getDrinkName()) == true){
+            emailNotifierRepository.notifyMissingDrink(command.getDrinkType().getDrinkName());
+            Sender sender = new Sender(command, moneyManager);
+            sender.messageLackOfDrink(command);
+        }else{
+            Sender sender = new Sender(command, moneyManager);
+            sender.messageCommandValidation(command, moneyManager);
+            ReportDto reportDto = new ReportDto(cashCount);
+            reportRepository.save(reportDto);
+        }
     }
 
     public List<ReportDto> getTotalReports(){

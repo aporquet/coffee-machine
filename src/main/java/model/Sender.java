@@ -23,4 +23,8 @@ public class Sender {
         }
         return "drink maker do a "+command.getDrinkType().getDrinkName()+" very "+command.isHot()+" with "+command.getNumberOfSugar()+" and a "+command.hasStick();
     }
+
+    public String messageLackOfDrink(Command command){
+        return "We are in lack of "+command.getDrinkType().getDrinkName();
+    }
 }
