@@ -13,7 +13,7 @@ public class Sender {
     }
 
     public String messageCommandValidation(Command command, MoneyManager moneyManager){
-        /*TODO: Change boolean to map a message to boolean values*/
+        /*Update: Change boolean to map a message to boolean values*/
         try {
             moneyManager.checkCommand(command);
         }

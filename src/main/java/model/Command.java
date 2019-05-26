@@ -3,7 +3,7 @@ package model;
 import common.DrinkType;
 import common.IncorrectNumberOfSugarException;
 
-class Command {
+public class Command {
 
     private DrinkType drinkType;
     private int numberOfSugar;
@@ -42,4 +42,5 @@ class Command {
     public boolean isHot() {
         return isHot;
     }
+
 }

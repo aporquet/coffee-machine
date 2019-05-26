@@ -2,7 +2,7 @@ package model;
 
 import common.NotEnoughtMoneyException;
 
-class MoneyManager {
+public class MoneyManager {
 
     private double customerMoney;
     private boolean validCommand;
