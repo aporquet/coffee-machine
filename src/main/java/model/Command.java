@@ -1,6 +1,9 @@
 package model;
 
-public class Command {
+import common.DrinkType;
+import common.IncorrectNumberOfSugarException;
+
+class Command {
 
     private DrinkType drinkType;
     private int numberOfSugar;

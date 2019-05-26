@@ -1,5 +1,7 @@
 package model;
 
+import common.DrinkType;
+import common.IncorrectNumberOfSugarException;
 import org.junit.Assert;
 import org.junit.Test;
 
