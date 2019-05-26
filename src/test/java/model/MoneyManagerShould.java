@@ -17,16 +17,16 @@ public class MoneyManagerShould {
     @Test
     public void valid_command_if_customer_money_is_greater_than_his_drink_command_price(){
         MoneyManager moneyManager = new MoneyManager(1);
-        Command command = new Command(DrinkType.Coffee, 0);
-        boolean validator = moneyManager.checkCommand(command);
-        Assert.assertTrue(validator == true);
+        Command command = new Command(DrinkType.Coffee, 0, false);
+        moneyManager.checkCommand(command);
+        Assert.assertTrue(moneyManager.isValidCommand() == true);
     }
 
     @Test
             (expected = NotEnoughtMoneyException.class)
     public void valid_command_if_customer_money_is_poor_than_his_drink_command_price(){
         MoneyManager moneyManager = new MoneyManager(0.3);
-        Command command = new Command(DrinkType.Coffee, 0);
+        Command command = new Command(DrinkType.Coffee, 0, true);
         boolean validator = moneyManager.checkCommand(command);
     }
 }

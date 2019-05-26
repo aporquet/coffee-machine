@@ -26,7 +26,4 @@ class MoneyManager {
         return validCommand;
     }
 
-    public void setValidCommand(boolean validCommand) {
-        this.validCommand = validCommand;
-    }
 }

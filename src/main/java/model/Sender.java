@@ -13,6 +13,7 @@ public class Sender {
     }
 
     public String messageCommandValidation(Command command, MoneyManager moneyManager){
+        /*TODO: Change boolean to map a message to boolean values*/
         try {
             moneyManager.checkCommand(command);
         }
@@ -20,6 +21,6 @@ public class Sender {
             double differencePrice = command.getDrinkType().getDrinkPrice() - moneyManager.getCustomerMoney();
             return "You need to add "+differencePrice+" to buy this drink";
         }
-        return " "+command.getDrinkType()+" "+command.getNumberOfSugar()+" "+command.hasStick();
+        return "drink maker do a "+command.getDrinkType().getDrinkName()+" very "+command.isHot()+" with "+command.getNumberOfSugar()+" and a "+command.hasStick();
     }
 }

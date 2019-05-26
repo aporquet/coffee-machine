@@ -8,17 +8,22 @@ class Command {
     private DrinkType drinkType;
     private int numberOfSugar;
     private boolean hasStick;
+    private boolean isHot;
 
-    public Command(DrinkType drinkType, int numberOfSugar) {
+    public Command(DrinkType drinkType, int numberOfSugar, boolean isHot) {
         if (numberOfSugar < 0 || numberOfSugar > 2){
             throw new IncorrectNumberOfSugarException();
         }
         this.drinkType = drinkType;
         this.numberOfSugar = numberOfSugar;
+        this.isHot = isHot;
         if (numberOfSugar != 0){
             hasStick = true;
         } else {
             hasStick = false;
+        }
+        if (drinkType.canBeHot() == false && isHot == true){
+            this.isHot = false;
         }
     }
 
@@ -30,17 +35,11 @@ class Command {
         return numberOfSugar;
     }
 
-    String mapperDrinkType(DrinkType drinkType){
-        if (drinkType == DrinkType.Tea){
-            return "T";
-        }
-        if (drinkType == DrinkType.Chocolate){
-            return "H";
-        }
-        return "C";
-    }
-
     public boolean hasStick() {
         return hasStick;
+    }
+
+    public boolean isHot() {
+        return isHot;
     }
 }
